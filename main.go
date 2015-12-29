@@ -11,7 +11,7 @@ import (
 func main() {
 	game := tl.NewGame()
 	level := level.GenerateLvl()
-	pl := player.GeneratePlayer(level)
+	pl := player.GeneratePlayer(level, game)
 	cursor := cursor.GenerateCursor(level)
 	level.AddEntity(pl)
 	level.AddEntity(cursor)

@@ -2,6 +2,8 @@ package player
 
 import tl "github.com/JoelOtter/termloop"
 
+//import "strconv"
+
 const (
 	RightArrow = '→'
 	LeftArrow  = '←'
@@ -17,14 +19,16 @@ type Player struct {
 	active      bool
 	direction   int
 	visionRange int
+	game        *tl.Game
 }
 
-func GeneratePlayer(level *tl.BaseLevel) *Player {
+func GeneratePlayer(level *tl.BaseLevel, game *tl.Game) *Player {
 	newPlayer := Player{level: level,
 		entity:      tl.NewEntity(10, 5, 5, 5),
 		active:      false,
 		direction:   1,
 		visionRange: 2,
+		game:        game,
 	}
 
 	return &newPlayer
@@ -40,14 +44,19 @@ func (player *Player) CalculateVision() {
 	}
 	switch player.direction {
 	case 1:
-		player.entity.SetCell(1, 1, &tl.Cell{Ch: '.'})
-		player.entity.SetCell(2, 1, &tl.Cell{Ch: '.'})
-		player.entity.SetCell(3, 1, &tl.Cell{Ch: '.'})
-		player.entity.SetCell(0, 0, &tl.Cell{Ch: '.'})
-		player.entity.SetCell(1, 0, &tl.Cell{Ch: '.'})
-		player.entity.SetCell(2, 0, &tl.Cell{Ch: '.'})
-		player.entity.SetCell(3, 0, &tl.Cell{Ch: '.'})
-		player.entity.SetCell(4, 0, &tl.Cell{Ch: '.'})
+		vis_y := []int{0, 1}
+		vis_x_1 := []int{1, 2, 3}
+		vis_x_2 := []int{0, 1, 2, 3, 4}
+		vis_x := make([][]int, 2)
+		vis_x[0] = vis_x_1
+		vis_x[1] = vis_x_2
+		for _, x := range vis_x {
+			for _, xx := range x {
+				for _, y := range vis_y {
+					player.entity.SetCell(xx, y, &tl.Cell{Ch: '.'})
+				}
+			}
+		}
 	case 2:
 		player.entity.SetCell(3, 1, &tl.Cell{Ch: '.'})
 		player.entity.SetCell(3, 2, &tl.Cell{Ch: '.'})
