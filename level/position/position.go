@@ -1,5 +1,5 @@
 package position
 
 type Position struct {
-	twoD [3]int
+	twoD [20]int
 }
