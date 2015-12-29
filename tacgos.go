@@ -2,10 +2,10 @@ package main
 
 import (
 	tl "github.com/JoelOtter/termloop"
-	//	"github.com/tkschmidt/gocom/bot"
-	"github.com/tkschmidt/gocom/cursor"
-	"github.com/tkschmidt/gocom/level"
-	"github.com/tkschmidt/gocom/player"
+	//	"github.com/tkschmidt/tacgos/bot"
+	"github.com/tkschmidt/tacgos/cursor"
+	"github.com/tkschmidt/tacgos/level"
+	"github.com/tkschmidt/tacgos/player"
 )
 
 func main() {
